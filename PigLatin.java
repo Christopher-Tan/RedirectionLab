@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Scanner;
 public class PigLatin {
     public static String pigLatinSimple(String s) {
         s = s.toLowerCase();
@@ -11,7 +12,7 @@ public class PigLatin {
     public static String pigLatin(String s) {
         s = s.toLowerCase();
         String[] digraphs = new String[]{"bl", "br", "ch", "ck", "cl", "cr", "dr", "fl", "fr", "gh", "gl", "gr", "ng", "ph", "pl", "pr", "qu", "sc", "sh", "sk", "sl", "sm", "sn", "sp", "st", "sw", "th", "tr", "tw", "wh", "wr"};
-        if (Arrays.asList(digraphs).contains(s.substring(0,2))) {
+        if (s.length() > 1 && Arrays.asList(digraphs).contains(s.substring(0,2))) {
             return s.substring(2,s.length()) + s.substring(0,2) + "ay";
         }
         return pigLatinSimple(s);
@@ -31,22 +32,17 @@ public class PigLatin {
         return pigLatin(s) + punctuation;
     }
     public static void main(String[] args) {
-        System.out.println(pigLatinSimple("mock"));
-        System.out.println(pigLatinSimple("pie"));
-        System.out.println(pigLatinSimple("david"));
-        System.out.println(pigLatinSimple("aaron"));
-        System.out.println(pigLatin("the"));
-        System.out.println(pigLatin("check"));
-        System.out.println(pigLatin("skee"));
-        System.out.println(pigLatin("emu"));
-        System.out.println(pigLatin("grade"));
-        System.out.println(pigLatinBest("*emu"));
-        System.out.println(pigLatinBest("4chan"));
-        System.out.println(pigLatinBest("fish!"));
-        System.out.println(pigLatinBest("fish"));
-        System.out.println(pigLatinBest("the."));
-        System.out.println(pigLatinBest("cat!"));
-        System.out.println(pigLatinBest("amazing?"));
-        System.out.println(pigLatinBest("apple%"));
+        Scanner n = new Scanner(System.in);
+        boolean use1 = false;
+        while (n.hasNextLine()) {
+            if (use1) {System.out.println("");} else {use1 = true;}
+            Scanner m = new Scanner(n.nextLine());
+            boolean use2 = false;
+            while (m.hasNext()) {
+                if (use2) {System.out.print(" ");} else {use2 = true;}
+                String s = m.next();
+                System.out.print(pigLatinBest(s));
+            }
+        }
     }
 }
