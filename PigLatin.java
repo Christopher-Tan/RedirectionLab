@@ -2,7 +2,8 @@ import java.util.Arrays;
 public class PigLatin {
     public static String pigLatinSimple(String s) {
         s = s.toLowerCase();
-        if (Arrays.asList(new String[]{"a","e","i","o","u"}).contains(s.substring(0,1))) {
+        String[] vowels = new String[]{"a", "e", "i", "o", "u"};
+        if (Arrays.asList(vowels).contains(s.substring(0,1))) {
             return s + "hay";
         }
         return s.substring(1,s.length()) + s.substring(0,1) + "ay";
@@ -15,6 +16,20 @@ public class PigLatin {
         }
         return pigLatinSimple(s);
     }
+    public static String pigLatinBest(String s) {
+        s = s.toLowerCase();
+        String[] letters = new String[]{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+        String[] notpunctuation = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+        if (!Arrays.asList(letters).contains(s.substring(0,1))) {
+            return s;
+        }
+        String punctuation = "";
+        if (!Arrays.asList(notpunctuation).contains(s.substring(s.length()-1))) {
+            punctuation += s.substring(s.length()-1);
+            s = s.substring(0,s.length()-1);
+        }
+        return pigLatin(s) + punctuation;
+    }
     public static void main(String[] args) {
         System.out.println(pigLatinSimple("mock"));
         System.out.println(pigLatinSimple("pie"));
@@ -25,5 +40,13 @@ public class PigLatin {
         System.out.println(pigLatin("skee"));
         System.out.println(pigLatin("emu"));
         System.out.println(pigLatin("grade"));
+        System.out.println(pigLatinBest("*emu"));
+        System.out.println(pigLatinBest("4chan"));
+        System.out.println(pigLatinBest("fish!"));
+        System.out.println(pigLatinBest("fish"));
+        System.out.println(pigLatinBest("the."));
+        System.out.println(pigLatinBest("cat!"));
+        System.out.println(pigLatinBest("amazing?"));
+        System.out.println(pigLatinBest("apple%"));
     }
 }
